@@ -8,9 +8,9 @@ using Infrastructure.Context;
 
 namespace Infrastructure.Repositories
 {
-    public class ToDoListRepository : BaseRepository<ToDoList>, IToDoListRepository
+    public class ToDoRepository : BaseRepository<ToDo>, IToDoRepository
     {
-        public ToDoListRepository(ToDoApiContext dbContext) : base(dbContext)
+        public ToDoRepository(ToDoApiContext dbContext) : base(dbContext)
         {
 
         }

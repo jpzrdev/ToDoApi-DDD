@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Context
 {
-    public class ToDoAppContext : DbContext
+    public class ToDoApiContext : DbContext
     {
-        public ToDoAppContext(DbContextOptions<ToDoAppContext> options) : base(options)
+        public ToDoApiContext(DbContextOptions<ToDoApiContext> options) : base(options)
         {
         }
 

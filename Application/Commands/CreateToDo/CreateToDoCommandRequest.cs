@@ -8,6 +8,7 @@ namespace Application.Commands.CreateToDo
 {
     public class CreateToDoCommandRequest : IRequest<CreateToDoCommandResponse>
     {
-        public string Title { get; set; }
+        public string Description { get; set; }
+        public Guid ToDoListId { get; set; }
     }
 }

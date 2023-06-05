@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<ToDoAppContext>(options =>
+builder.Services.AddDbContext<ToDoApiContext>(options =>
     options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=todo_api_database"));
 
 builder.Services.AddApplicationDependencies();

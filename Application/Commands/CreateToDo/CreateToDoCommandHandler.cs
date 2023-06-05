@@ -11,19 +11,25 @@ namespace Application.Commands.CreateToDo
     public class CreateToDoCommandHandler : IRequestHandler<CreateToDoCommandRequest, CreateToDoCommandResponse>
     {
         private readonly IToDoListRepository _toDoListRepository;
-        public CreateToDoCommandHandler(IToDoListRepository toDoListRepository)
+        private readonly IToDoRepository _toDoRepository;
+        public CreateToDoCommandHandler(IToDoListRepository toDoListRepository, IToDoRepository todoRepository)
         {
             _toDoListRepository = toDoListRepository;
+            _toDoRepository = todoRepository;
         }
         public async Task<CreateToDoCommandResponse> Handle(CreateToDoCommandRequest request, CancellationToken cancellationToken)
         {
-            var toDoList = ToDoList.Create(request.Title);
-            await _toDoListRepository.AddAsync(toDoList);
-            return new CreateToDoCommandResponse
+            var todoList = await _toDoListRepository.GetByIdAsync(request.ToDoListId);
+
+            if (todoList is null)
             {
-                Id = toDoList.Id,
-                Title = toDoList.Title
-            };
+                throw new Exception();
+            }
+
+            todoList.AddNewToDo(ToDo.Create(request.Description));
+            await _toDoListRepository.UpdateAsync(todoList);
+
+            return new CreateToDoCommandResponse { };
         }
     }
 }

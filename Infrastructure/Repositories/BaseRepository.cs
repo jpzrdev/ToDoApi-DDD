@@ -10,8 +10,8 @@ namespace Infrastructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly ToDoAppContext _dbContext;
-        public BaseRepository(ToDoAppContext dbContext)
+        private readonly ToDoApiContext _dbContext;
+        public BaseRepository(ToDoApiContext dbContext)
         {
             _dbContext = dbContext;
         }
