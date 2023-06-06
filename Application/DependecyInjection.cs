@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using FluentValidation;
 using System.Reflection;
+using Mapster;
 
 namespace Application
 {

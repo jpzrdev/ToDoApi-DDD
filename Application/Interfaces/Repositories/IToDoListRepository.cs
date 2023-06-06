@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Entities;
 
-namespace Domain.Interfaces.Repositories
+namespace Application.Interfaces.Repositories
 {
-    public interface IToDoRepository : IBaseRepository<ToDo>
+    public interface IToDoListRepository : IBaseRepository<ToDoList>
     {
 
     }
