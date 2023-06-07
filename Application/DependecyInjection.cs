@@ -7,6 +7,7 @@ using MediatR;
 using FluentValidation;
 using System.Reflection;
 using Mapster;
+using FluentValidation.AspNetCore;
 
 namespace Application
 {
@@ -15,7 +16,8 @@ namespace Application
         public static IServiceCollection AddApplicationDependencies(this IServiceCollection services)
         {
             services.AddMediatR(typeof(DependencyInjection));
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(DependencyInjection)));
             return services;
         }
     }
