@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Interfaces.Repositories;
+using Application.Pagination;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,26 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbContext.Set<T>().ToListAsync();
+        }
+
+        public virtual async Task<PaginatedData<T>> GetAllPaginatedAsync(int pageNumber, int pageSize)
+        {
+            var totalCount = await _dbContext.Set<T>().CountAsync();
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            var data = await _dbContext.Set<T>()
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedData<T>
+            {
+                TotalPages = totalPages,
+                TotalCount = totalCount,
+                Page = pageNumber,
+                PageSize = pageSize,
+                Data = data.AsQueryable()
+            };
         }
 
         public async Task AddAsync(T entity)

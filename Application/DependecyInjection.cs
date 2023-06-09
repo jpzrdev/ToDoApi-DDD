@@ -18,6 +18,9 @@ namespace Application
             services.AddMediatR(typeof(DependencyInjection));
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(DependencyInjection)));
+
+            // TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }

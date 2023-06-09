@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Application.Interfaces.Repositories;
 using MediatR;
+using Mapster;
 
 namespace Application.Commands.CreateToDoList
 {
@@ -19,11 +20,7 @@ namespace Application.Commands.CreateToDoList
         {
             var toDoList = ToDoList.Create(request.Title);
             await _toDoListRepository.AddAsync(toDoList);
-            return new CreateToDoListCommandResponse
-            {
-                Id = toDoList.Id,
-                Title = toDoList.Title
-            };
+            return toDoList.Adapt<CreateToDoListCommandResponse>();
         }
     }
 }

@@ -10,7 +10,9 @@ namespace Application.Commands.CreateToDoList
     {
         public CreateToDoListCommandValidator()
         {
-            RuleFor(req => req.Title).NotEmpty().NotNull();
+            RuleFor(req => req.Title)
+            .NotEmpty()
+            .NotNull();
         }
     }
 }
