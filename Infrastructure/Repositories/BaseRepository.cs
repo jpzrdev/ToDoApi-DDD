@@ -42,7 +42,7 @@ namespace Infrastructure.Repositories
                 TotalCount = totalCount,
                 Page = pageNumber,
                 PageSize = pageSize,
-                Data = data.AsQueryable()
+                Data = data
             };
         }
 

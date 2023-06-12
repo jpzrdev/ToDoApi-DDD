@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.CreateToDoList;
+using Application.Queries.GetAllToDoLists;
+using Application.Queries.GetAllToDoListsPaginated;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,6 +32,21 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid identifier)
         {
+            // var response = await _mediator.Send()
+            return Ok();
+        }
+
+        [HttpGet("paginated")]
+        public async Task<IActionResult> GetAllPaginated(GetAllToDoListsPaginatedRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll(GetAllToDoListsRequest request)
+        {
+            var response = await _mediator.Send(request);
             return Ok();
         }
     }

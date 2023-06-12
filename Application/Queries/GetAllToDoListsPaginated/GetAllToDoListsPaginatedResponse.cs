@@ -2,19 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Commands.CreateToDoList;
 using Application.DTO;
 using Application.Pagination;
 using Domain.Entities;
-using Mapster;
 
-namespace Application.Profiles
+namespace Application.Queries.GetAllToDoListsPaginated
 {
-    public class ToDoListProfile
+    public class GetAllToDoListsPaginatedResponse : PaginatedData<ToDoListResponseDTO>
     {
-        public static void Maps()
-        {
 
-        }
     }
 }

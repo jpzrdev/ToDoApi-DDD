@@ -8,6 +8,6 @@ namespace Application.Pagination
         public int TotalPages { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
-        public IQueryable<T> Data { get; set; }
+        public IList<T> Data { get; set; }
     }
 }
