@@ -6,7 +6,7 @@ using Application.DTO;
 using Application.Pagination;
 using Domain.Entities;
 
-namespace Application.Queries.GetAllToDoListsPaginated
+namespace Application.Queries.TodoLists.GetAllToDoListsPaginated
 {
     public class GetAllToDoListsPaginatedResponse : PaginatedData<ToDoListResponseDTO>
     {

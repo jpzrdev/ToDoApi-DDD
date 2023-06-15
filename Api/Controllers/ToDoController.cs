@@ -19,11 +19,19 @@ namespace Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("todo")]
-        public async Task<IActionResult> CreateToDo(CreateToDoCommandRequest request)
+        [HttpPut]
+        public async Task<IActionResult> UpdateTodo(CreateToDoCommandRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTodo(CreateToDoCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
     }
 }

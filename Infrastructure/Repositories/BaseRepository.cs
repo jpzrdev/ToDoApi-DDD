@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Application.Interfaces.Repositories;
 using Application.Pagination;
@@ -16,14 +17,14 @@ namespace Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<T> GetByIdAsync(Guid id)
-        {
-            return await _dbContext.Set<T>().FindAsync(id);
-        }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
         {
-            return await _dbContext.Set<T>().ToListAsync();
+            IQueryable<T> query = _dbContext.Set<T>();
+
+            IncludeProperties(ref query, properties);
+
+            return await query.ToListAsync();
         }
 
         public virtual async Task<PaginatedData<T>> GetAllPaginatedAsync(int pageNumber, int pageSize)
@@ -63,7 +64,25 @@ namespace Infrastructure.Repositories
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
+        protected void IncludeProperties(ref IQueryable<T> query, params Expression<Func<T, object>>[] properties)
+        {
+            foreach (var includeProperty in properties)
+            {
+                query = query.Include(includeProperty);
+            }
+        }
 
+        public async Task<T> Find(Expression<Func<T, bool>> filterExpression, params Expression<Func<T, object>>[] properties)
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
 
+            if (filterExpression is not null)
+                query = query.Where(filterExpression);
+
+            if (properties is not null)
+                IncludeProperties(ref query, properties);
+
+            return query.SingleOrDefault();
+        }
     }
 }

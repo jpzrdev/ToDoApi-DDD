@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Application.Pagination;
 using MediatR;
 
-namespace Application.Queries.GetAllToDoLists
+namespace Application.Queries.TodoLists.GetAllToDoLists
 {
-    public class GetAllToDoListsRequest : PaginatedRequest, IRequest<GetAllToDoListsResponse>
+    public class GetAllToDoListsRequest : IRequest<GetAllToDoListsResponse>
     {
     }
 }

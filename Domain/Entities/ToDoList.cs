@@ -12,7 +12,7 @@ namespace Domain.Entities
             Title = title;
         }
 
-        public List<ToDo> ToDos { get; private set; }
+        public virtual List<ToDo> ToDos { get; private set; } = new List<ToDo>();
         public string Title { get; private set; }
 
         public static ToDoList Create(string title)

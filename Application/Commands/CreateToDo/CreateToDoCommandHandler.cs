@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Application.Interfaces.Repositories;
 using MediatR;
+using Mapster;
 
 namespace Application.Commands.CreateToDo
 {
@@ -29,7 +30,7 @@ namespace Application.Commands.CreateToDo
             todoList.AddNewToDo(ToDo.Create(request.Description));
             await _toDoListRepository.UpdateAsync(todoList);
 
-            return new CreateToDoCommandResponse { };
+            return todoList.Adapt<CreateToDoCommandResponse>();
         }
     }
 }

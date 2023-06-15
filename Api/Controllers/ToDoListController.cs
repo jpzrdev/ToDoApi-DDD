@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Commands.CreateToDo;
 using Application.Commands.CreateToDoList;
-using Application.Queries.GetAllToDoLists;
-using Application.Queries.GetAllToDoListsPaginated;
+using Application.Queries.TodoLists.GetAllToDoLists;
+using Application.Queries.TodoLists.GetAllToDoListsPaginated;
+using Application.Queries.TodoLists.GetToDoListById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,24 +32,31 @@ namespace Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid identifier)
+        public async Task<IActionResult> GetById([FromRoute] GetToDoListByIdRequest request)
         {
-            // var response = await _mediator.Send()
-            return Ok();
+            var response = await _mediator.Send(request);
+            return Ok(response);
         }
 
         [HttpGet("paginated")]
-        public async Task<IActionResult> GetAllPaginated(GetAllToDoListsPaginatedRequest request)
+        public async Task<IActionResult> GetAllPaginated([FromQuery] GetAllToDoListsPaginatedRequest request)
         {
             var response = await _mediator.Send(request);
-            return Ok();
+            return Ok(response);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(GetAllToDoListsRequest request)
+        public async Task<IActionResult> GetAll()
+        {
+            var response = await _mediator.Send(new GetAllToDoListsRequest());
+            return Ok(response);
+        }
+
+        [HttpPost("add-todo")]
+        public async Task<IActionResult> CreateToDo(CreateToDoCommandRequest request)
         {
             var response = await _mediator.Send(request);
-            return Ok();
+            return Ok(response);
         }
     }
 }

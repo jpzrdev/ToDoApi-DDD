@@ -6,9 +6,9 @@ using Application.DTO;
 using Application.Pagination;
 using Domain.Entities;
 
-namespace Application.Queries.GetAllToDoLists
+namespace Application.Queries.TodoLists.GetToDoListById
 {
-    public class GetAllToDoListsResponse : ToDoListResponseDTO
+    public class GetToDoListByIdResponse : ToDoListResponseDTO
     {
 
     }

@@ -14,6 +14,8 @@ namespace Domain.Entities
 
         public string Description { get; private set; }
         public bool Done { get; private set; } = false;
+        public Guid ToDoListId { get; set; }
+        public virtual ToDoList ToDoList { get; set; }
 
         public static ToDo Create(string description)
         {

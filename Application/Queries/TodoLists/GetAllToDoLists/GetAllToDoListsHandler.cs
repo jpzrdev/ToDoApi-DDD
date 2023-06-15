@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.DTO;
 using Application.Interfaces.Repositories;
 using Mapster;
 using MediatR;
 
-namespace Application.Queries.GetAllToDoLists
+namespace Application.Queries.TodoLists.GetAllToDoLists
 {
     public class GetAllToDoListsHandler : IRequestHandler<GetAllToDoListsRequest, GetAllToDoListsResponse>
     {
@@ -19,7 +20,10 @@ namespace Application.Queries.GetAllToDoLists
         public async Task<GetAllToDoListsResponse> Handle(GetAllToDoListsRequest request, CancellationToken cancellationToken)
         {
             var toDoLists = await _toDoListRepository.GetAllAsync();
-            return toDoLists.Adapt<GetAllToDoListsResponse>();
+            return new GetAllToDoListsResponse
+            {
+                ToDoLists = toDoLists.Adapt<List<ToDoListResponseDTO>>()
+            };
         }
     }
 }

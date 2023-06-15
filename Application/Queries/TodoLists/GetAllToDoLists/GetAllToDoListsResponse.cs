@@ -2,19 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Commands.CreateToDoList;
 using Application.DTO;
 using Application.Pagination;
 using Domain.Entities;
-using Mapster;
 
-namespace Application.Profiles
+namespace Application.Queries.TodoLists.GetAllToDoLists
 {
-    public class ToDoListProfile
+    public class GetAllToDoListsResponse
     {
-        public static void Maps()
-        {
-
-        }
+        public IEnumerable<ToDoListResponseDTO> ToDoLists { get; set; }
     }
 }

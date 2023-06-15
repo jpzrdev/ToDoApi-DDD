@@ -6,7 +6,7 @@ using Application.Interfaces.Repositories;
 using Mapster;
 using MediatR;
 
-namespace Application.Queries.GetAllToDoListsPaginated
+namespace Application.Queries.TodoLists.GetAllToDoListsPaginated
 {
     public class GetAllToDoListsPaginatedHandler : IRequestHandler<GetAllToDoListsPaginatedRequest, GetAllToDoListsPaginatedResponse>
     {
