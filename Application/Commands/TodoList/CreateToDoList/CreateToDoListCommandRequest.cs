@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Application.Commands.CreateToDoList
+namespace Application.Commands.TodoList.CreateToDoList
 {
     public class CreateToDoListCommandRequest : IRequest<CreateToDoListCommandResponse>
     {

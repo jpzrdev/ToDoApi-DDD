@@ -25,6 +25,11 @@ namespace Domain.Entities
             ToDos.Add(toDo);
         }
 
+        public void Update(string title)
+        {
+            Title = title;
+        }
+
         public void RemoveToDo(Guid toDoId)
         {
             var toDoToRemove = ToDos.FirstOrDefault(x => x.Id == toDoId);

@@ -11,7 +11,7 @@ namespace Application.Interfaces.Repositories
     {
         Task<T> Find(Expression<Func<T, bool>> filterExpression, params Expression<Func<T, object>>[] includes);
         Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
-        Task<PaginatedData<T>> GetAllPaginatedAsync(int page, int take);
+        Task<PaginatedData<T>> GetAllPaginatedAsync(int page, int take, params Expression<Func<T, object>>[] includes);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);

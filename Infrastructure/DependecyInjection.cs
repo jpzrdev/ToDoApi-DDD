@@ -14,6 +14,7 @@ namespace Infrastructure
         {
             services.AddScoped<IToDoListRepository, ToDoListRepository>();
             services.AddScoped<IToDoRepository, ToDoRepository>();
+
             return services;
         }
     }

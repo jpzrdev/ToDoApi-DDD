@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Commands.CreateToDo;
-using Application.Commands.CreateToDoList;
+using Application.Commands.TodoList.CreateToDoList;
+using Application.Commands.TodoList.UpdateToDoList;
 using Application.Queries.TodoLists.GetAllToDoLists;
 using Application.Queries.TodoLists.GetAllToDoListsPaginated;
 using Application.Queries.TodoLists.GetToDoListById;
@@ -31,7 +31,7 @@ namespace Api.Controllers
             return Created(url, response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{Id}")]
         public async Task<IActionResult> GetById([FromRoute] GetToDoListByIdRequest request)
         {
             var response = await _mediator.Send(request);
@@ -52,8 +52,8 @@ namespace Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost("add-todo")]
-        public async Task<IActionResult> CreateToDo(CreateToDoCommandRequest request)
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateToDoListCommandRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);

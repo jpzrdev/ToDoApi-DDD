@@ -22,17 +22,25 @@ namespace Infrastructure.Repositories
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
-            IncludeProperties(ref query, properties);
+            ExcludeDeleted(ref query);
+            IncludeProperties(ref query, includes);
 
             return await query.ToListAsync();
         }
 
-        public virtual async Task<PaginatedData<T>> GetAllPaginatedAsync(int pageNumber, int pageSize)
+        public virtual async Task<PaginatedData<T>> GetAllPaginatedAsync(int pageNumber, int pageSize, params Expression<Func<T, object>>[] includes)
         {
-            var totalCount = await _dbContext.Set<T>().CountAsync();
+            IQueryable<T> query = _dbContext.Set<T>();
+
+            var totalCount = await query.CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
-            var data = await _dbContext.Set<T>()
+
+            ExcludeDeleted(ref query);
+            IncludeProperties(ref query, includes);
+
+
+            var data = await query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
@@ -71,16 +79,28 @@ namespace Infrastructure.Repositories
                 query = query.Include(includeProperty);
             }
         }
-
-        public async Task<T> Find(Expression<Func<T, bool>> filterExpression, params Expression<Func<T, object>>[] properties)
+        protected void ExcludeDeleted(ref IQueryable<T> query)
+        {
+            // Adicione a condição para excluir os registros com Deleted = true
+            var deletedProperty = typeof(T).GetProperty("Deleted");
+            if (deletedProperty != null && deletedProperty.PropertyType == typeof(bool))
+            {
+                var parameter = Expression.Parameter(typeof(T), "e");
+                var deletedExpression = Expression.Property(parameter, deletedProperty);
+                var condition = Expression.Equal(deletedExpression, Expression.Constant(false));
+                var lambda = Expression.Lambda<Func<T, bool>>(condition, parameter);
+                query = query.Where(lambda);
+            }
+        }
+        public async Task<T> Find(Expression<Func<T, bool>> filterExpression, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
             if (filterExpression is not null)
                 query = query.Where(filterExpression);
 
-            if (properties is not null)
-                IncludeProperties(ref query, properties);
+            ExcludeDeleted(ref query);
+            IncludeProperties(ref query, includes);
 
             return query.SingleOrDefault();
         }

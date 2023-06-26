@@ -18,7 +18,7 @@ namespace Application.Queries.TodoLists.GetAllToDoListsPaginated
         }
         public async Task<GetAllToDoListsPaginatedResponse> Handle(GetAllToDoListsPaginatedRequest request, CancellationToken cancellationToken)
         {
-            var toDoListsPaginated = await _toDoListRepository.GetAllPaginatedAsync(request.Page, request.Take);
+            var toDoListsPaginated = await _toDoListRepository.GetAllPaginatedAsync(request.Page, request.Take, x => x.ToDos);
             return toDoListsPaginated.Adapt<GetAllToDoListsPaginatedResponse>();
         }
     }

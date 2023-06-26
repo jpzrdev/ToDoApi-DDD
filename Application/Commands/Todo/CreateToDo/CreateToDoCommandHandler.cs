@@ -7,7 +7,7 @@ using Application.Interfaces.Repositories;
 using MediatR;
 using Mapster;
 
-namespace Application.Commands.CreateToDo
+namespace Application.Commands.Todo.CreateToDo
 {
     public class CreateToDoCommandHandler : IRequestHandler<CreateToDoCommandRequest, CreateToDoCommandResponse>
     {
@@ -20,15 +20,15 @@ namespace Application.Commands.CreateToDo
         }
         public async Task<CreateToDoCommandResponse> Handle(CreateToDoCommandRequest request, CancellationToken cancellationToken)
         {
-            var todoList = await _toDoListRepository.GetByIdAsync(request.ToDoListId);
+            var todoList = await _toDoListRepository.Find(x => x.Id == request.ToDoListId, x => x.ToDos);
 
             if (todoList is null)
             {
                 throw new Exception();
             }
 
-            todoList.AddNewToDo(ToDo.Create(request.Description));
-            await _toDoListRepository.UpdateAsync(todoList);
+            var todo = ToDo.Create(request.Description, todoList.Id);
+            await _toDoRepository.AddAsync(todo);
 
             return todoList.Adapt<CreateToDoCommandResponse>();
         }

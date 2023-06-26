@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 
-namespace Application.Commands.CreateToDoList
+namespace Application.Commands.TodoList.UpdateToDoList
 {
-    public class CreateToDoListCommandValidator : AbstractValidator<CreateToDoListCommandRequest>
+    public class UpdateToDoListCommandValidator : AbstractValidator<UpdateToDoListCommandRequest>
     {
-        public CreateToDoListCommandValidator()
+        public UpdateToDoListCommandValidator()
         {
             RuleFor(req => req.Title)
             .NotEmpty()

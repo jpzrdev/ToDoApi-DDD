@@ -7,9 +7,10 @@ namespace Domain.Entities
 {
     public class ToDo : BaseEntity
     {
-        private ToDo(string description)
+        private ToDo(string description, Guid toDoListId)
         {
             Description = description;
+            ToDoListId = toDoListId;
         }
 
         public string Description { get; private set; }
@@ -17,9 +18,15 @@ namespace Domain.Entities
         public Guid ToDoListId { get; set; }
         public virtual ToDoList ToDoList { get; set; }
 
-        public static ToDo Create(string description)
+        public static ToDo Create(string description, Guid toDoListId)
         {
-            return new ToDo(description);
+            return new ToDo(description, toDoListId);
+        }
+
+        public void Update(string description, Guid? todoListId)
+        {
+            Description = description ?? Description;
+            ToDoListId = todoListId ?? ToDoListId;
         }
 
         public void UpdateDone()

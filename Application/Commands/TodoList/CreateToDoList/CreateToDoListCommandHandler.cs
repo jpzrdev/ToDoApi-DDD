@@ -7,7 +7,7 @@ using Application.Interfaces.Repositories;
 using MediatR;
 using Mapster;
 
-namespace Application.Commands.CreateToDoList
+namespace Application.Commands.TodoList.CreateToDoList
 {
     public class CreateToDoListCommandHandler : IRequestHandler<CreateToDoListCommandRequest, CreateToDoListCommandResponse>
     {

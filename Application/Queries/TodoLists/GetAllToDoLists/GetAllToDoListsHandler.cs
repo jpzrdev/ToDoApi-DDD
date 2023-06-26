@@ -19,7 +19,7 @@ namespace Application.Queries.TodoLists.GetAllToDoLists
         }
         public async Task<GetAllToDoListsResponse> Handle(GetAllToDoListsRequest request, CancellationToken cancellationToken)
         {
-            var toDoLists = await _toDoListRepository.GetAllAsync();
+            var toDoLists = await _toDoListRepository.GetAllAsync(x => x.ToDos);
             return new GetAllToDoListsResponse
             {
                 ToDoLists = toDoLists.Adapt<List<ToDoListResponseDTO>>()

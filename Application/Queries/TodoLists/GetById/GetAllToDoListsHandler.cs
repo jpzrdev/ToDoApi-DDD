@@ -19,7 +19,7 @@ namespace Application.Queries.TodoLists.GetToDoListById
         }
         public async Task<GetToDoListByIdResponse> Handle(GetToDoListByIdRequest request, CancellationToken cancellationToken)
         {
-            var toDoList = await _toDoListRepository.GetByIdAsync(request.Id);
+            var toDoList = await _toDoListRepository.Find(x => x.Id == request.Id);
             return toDoList.Adapt<GetToDoListByIdResponse>();
         }
     }
