@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Commands.Todo.DeleteToDoList;
 using Application.Commands.TodoList.CreateToDoList;
 using Application.Commands.TodoList.UpdateToDoList;
 using Application.Queries.TodoLists.GetAllToDoLists;
@@ -54,6 +55,13 @@ namespace Api.Controllers
 
         [HttpPut]
         public async Task<IActionResult> Update(UpdateToDoListCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteToDoListCommandRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);

@@ -22,7 +22,6 @@ namespace Infrastructure.Repositories
         {
             IQueryable<T> query = _dbContext.Set<T>();
 
-            ExcludeDeleted(ref query);
             IncludeProperties(ref query, includes);
 
             return await query.ToListAsync();
@@ -36,7 +35,6 @@ namespace Infrastructure.Repositories
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
 
-            ExcludeDeleted(ref query);
             IncludeProperties(ref query, includes);
 
 
@@ -77,21 +75,10 @@ namespace Infrastructure.Repositories
             foreach (var includeProperty in properties)
             {
                 query = query.Include(includeProperty);
+
             }
         }
-        protected void ExcludeDeleted(ref IQueryable<T> query)
-        {
-            // Adicione a condição para excluir os registros com Deleted = true
-            var deletedProperty = typeof(T).GetProperty("Deleted");
-            if (deletedProperty != null && deletedProperty.PropertyType == typeof(bool))
-            {
-                var parameter = Expression.Parameter(typeof(T), "e");
-                var deletedExpression = Expression.Property(parameter, deletedProperty);
-                var condition = Expression.Equal(deletedExpression, Expression.Constant(false));
-                var lambda = Expression.Lambda<Func<T, bool>>(condition, parameter);
-                query = query.Where(lambda);
-            }
-        }
+
         public async Task<T> Find(Expression<Func<T, bool>> filterExpression, params Expression<Func<T, object>>[] includes)
         {
             IQueryable<T> query = _dbContext.Set<T>();
@@ -99,7 +86,6 @@ namespace Infrastructure.Repositories
             if (filterExpression is not null)
                 query = query.Where(filterExpression);
 
-            ExcludeDeleted(ref query);
             IncludeProperties(ref query, includes);
 
             return query.SingleOrDefault();

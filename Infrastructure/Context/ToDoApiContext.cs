@@ -16,6 +16,15 @@ namespace Infrastructure.Context
         public DbSet<ToDo> ToDos { get; set; }
         public DbSet<ToDoList> ToDoLists { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ToDo>()
+                .HasQueryFilter(x => x.Deleted == false);
+
+            modelBuilder.Entity<ToDoList>()
+            .HasQueryFilter(x => x.Deleted == false);
+        }
+
     }
 
 }

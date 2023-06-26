@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.DTO;
 
-namespace Application.Commands.Todo.UpdateToDo
+namespace Application.Commands.Todo.DeleteToDoList
 {
-    public class UpdateToDoCommandResponse : ToDoResponseDTO
+    public class DeleteToDoListCommandResponse
     {
     }
 }

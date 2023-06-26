@@ -55,20 +55,3 @@ The ToDoApi provides the following endpoints for managing ToDo items:
 
 For detailed information on request and response formats, please refer to the API documentation or explore the API using a tool like Swagger.
 
-## Contributing
-
-Contributions to the ToDoApi project are welcome. If you encounter any bugs, have feature requests, or would like to make improvements, please open an issue or submit a pull request.
-
-When contributing, please ensure the following:
-
-- Follow the existing coding style and conventions used in the project.
-- Write clear and concise commit messages.
-- Document any changes or new features in the relevant documentation files.
-
-## License
-
-The ToDoApi project is licensed under the [MIT License](https://chat.openai.com/LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
-
-## Acknowledgements
-
-We would like to acknowledge the contributions and inspiration from various open-source projects and the developer community. Their work and guidance have been instrumental in the development of this project.

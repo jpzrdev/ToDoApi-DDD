@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.Todo.CreateToDo;
+using Application.Commands.Todo.DeleteToDo;
+using Application.Commands.Todo.UpdateToDo;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,13 +21,6 @@ namespace Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(CreateToDoCommandRequest request)
-        {
-            var response = await _mediator.Send(request);
-            return Ok(response);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(CreateToDoCommandRequest request)
         {
@@ -33,8 +28,15 @@ namespace Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete(CreateToDoCommandRequest request)
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateToDoCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete([FromRoute] DeleteToDoCommandRequest request)
         {
             var response = await _mediator.Send(request);
             return Ok(response);
