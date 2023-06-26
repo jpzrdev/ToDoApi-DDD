@@ -20,22 +20,10 @@ namespace Domain.Entities
             return new ToDoList(title);
         }
 
-        public void AddNewToDo(ToDo toDo)
-        {
-            ToDos.Add(toDo);
-        }
-
         public void Update(string title)
         {
             Title = title;
         }
 
-        public void RemoveToDo(Guid toDoId)
-        {
-            var toDoToRemove = ToDos.FirstOrDefault(x => x.Id == toDoId);
-
-            if (toDoToRemove != null)
-                ToDos.Remove(toDoToRemove);
-        }
     }
 }

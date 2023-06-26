@@ -1,6 +1,7 @@
 # ToDoApi
 
-This project is a ToDo API developed in C# using the Domain-Driven Design (DDD) architecture. It includes separate projects for the API, application layer, domain layer, and infrastructure layer. The API provides endpoints for managing ToDo items, while adhering to the principles of DDD, using a rich domain model, repository pattern, and Entity Framework for data persistence.
+This project is a ToDo API developed in C# using the Domain-Driven Design (DDD) architecture. 
+The objective is to make an simple Todo Api but using more complex architecture to represent a more enterprise api. 
 
 ## Project Structure
 
@@ -14,6 +15,8 @@ The solution is divided into the following projects:
 
     4.  Infrastructure: The infrastructure layer provides implementations for data persistence, external services, and other infrastructure-related concerns. In this project, Entity Framework is utilized to interact with the underlying database for storing and retrieving ToDo items.
 
+    5. Tests: The tests project contains all tests using xUnit.
+
 ## Dependencies
 
 The following dependencies are used in the project:
@@ -22,6 +25,8 @@ The following dependencies are used in the project:
 - ASP.NET Core: Provides the framework for building the API and handling HTTP requests.
 - Newtonsoft.Json: Used for JSON serialization and deserialization.
 - Microsoft.Extensions.DependencyInjection: Used for dependency injection and managing dependencies between components.
+- Mapster: For map responses.
+- FluentValidations: For request validations.
 
 ## Getting Started
 
@@ -47,11 +52,19 @@ To get started with the ToDoApi project, follow these steps:
 
 The ToDoApi provides the following endpoints for managing ToDo items:
 
-- GET /api/todo: Retrieves a list of all ToDo items.
-- GET /api/todo/{id}: Retrieves a specific ToDo item by its ID.
+Todo
 - POST /api/todo: Creates a new ToDo item.
-- PUT /api/todo/{id}: Updates an existing ToDo item.
+- PUT /api/todo: Updates an existing ToDo item.
 - DELETE /api/todo/{id}: Deletes a ToDo item.
+
+TodoList
+- POST /api/todo-list: Creates a new ToDoList item.
+- PUT /api/todo-list: Updates an existing ToDoList item.
+- DELETE /api/todo-list/{id}: Deletes a ToDoList item with all associated Todos. 
+- GET /api/todo-list: Get all ToDolists and Todos associated.
+- GET /api/todo-list/{id}: Get ToDolist by Id and Todos associated.
+- GET /api/todo-list/paginated: Get all ToDolists and Todos associated with pagination.
+
 
 For detailed information on request and response formats, please refer to the API documentation or explore the API using a tool like Swagger.
 
