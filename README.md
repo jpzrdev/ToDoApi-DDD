@@ -1,7 +1,7 @@
 # ToDoApi
 
-This project is a ToDo API developed in C# using the Domain-Driven Design (DDD) architecture. 
-The objective is to make an simple Todo Api but using more complex architecture to represent a more enterprise api. 
+This project is a ToDo API developed in C# using the Domain-Driven Design (DDD) architecture.
+The objective is to make an simple Todo Api but using more complex architecture to represent a more enterprise api.
 
 ## Project Structure
 
@@ -53,18 +53,19 @@ To get started with the ToDoApi project, follow these steps:
 The ToDoApi provides the following endpoints for managing ToDo items:
 
 Todo
+
 - POST /api/todo: Creates a new ToDo item.
 - PUT /api/todo: Updates an existing ToDo item.
 - DELETE /api/todo/{id}: Deletes a ToDo item.
+- PUT /api/todo/done: Toogle Todo Done property.
 
 TodoList
+
 - POST /api/todo-list: Creates a new ToDoList item.
 - PUT /api/todo-list: Updates an existing ToDoList item.
-- DELETE /api/todo-list/{id}: Deletes a ToDoList item with all associated Todos. 
+- DELETE /api/todo-list/{id}: Deletes a ToDoList item with all associated Todos.
 - GET /api/todo-list: Get all ToDolists and Todos associated.
 - GET /api/todo-list/{id}: Get ToDolist by Id and Todos associated.
 - GET /api/todo-list/paginated: Get all ToDolists and Todos associated with pagination.
 
-
 For detailed information on request and response formats, please refer to the API documentation or explore the API using a tool like Swagger.
-
