@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class ToDoResponseDTO
+    public class ToDoResponseDTO : BaseResponse
     {
         public Guid Id { get; set; }
         public string Description { get; set; }

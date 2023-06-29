@@ -13,7 +13,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ToDoController : ControllerBase
+    public class ToDoController : BaseController
     {
         private readonly IMediator _mediator;
 

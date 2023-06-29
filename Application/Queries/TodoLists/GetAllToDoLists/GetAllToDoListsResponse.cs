@@ -8,7 +8,7 @@ using Domain.Entities;
 
 namespace Application.Queries.TodoLists.GetAllToDoLists
 {
-    public class GetAllToDoListsResponse
+    public class GetAllToDoListsResponse : BaseResponse
     {
         public IEnumerable<ToDoListResponseDTO> ToDoLists { get; set; }
     }

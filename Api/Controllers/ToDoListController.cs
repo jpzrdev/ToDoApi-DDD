@@ -15,7 +15,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/todo-list")]
-    public class ToDoListController : ControllerBase
+    public class ToDoListController : BaseController
     {
 
         private readonly IMediator _mediator;
@@ -49,8 +49,8 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var response = await _mediator.Send(new GetAllToDoListsRequest());
-            return Ok(response);
+
+            return CreateResponse(await _mediator.Send(new GetAllToDoListsRequest()));
         }
 
         [HttpPut]

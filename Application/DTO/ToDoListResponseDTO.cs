@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class ToDoListResponseDTO
+    public class ToDoListResponseDTO : BaseResponse
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
